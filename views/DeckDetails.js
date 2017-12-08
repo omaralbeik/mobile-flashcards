@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 // Navigation
-import {CREATEQUESTION} from '../views/Navigator';
+import {CREATEQUESTION, QUIZ} from '../views/Navigator';
 
 // Components
 import Button from '../components/Button';
@@ -38,14 +38,15 @@ class DeckDetails extends React.Component {
   }
 
   handleAddQuestion() {
-    console.log('Did press create question');
     const {deck} = this.props.navigation.state.params;
     const {navigate, updater} = this.props;
     navigate(CREATEQUESTION, {deck: deck, updater: updater});
   }
 
   handleStartQuiz() {
-    console.log('Did press start quiz');
+    const {deck} = this.props.navigation.state.params;
+    const {navigate} = this.props;
+    navigate(QUIZ, {deck: deck});
   }
 
   handleDeleteDeck() {

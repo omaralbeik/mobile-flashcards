@@ -60,18 +60,17 @@ class CreateQuestion extends React.Component {
 
     var disabled = false;
 
-    // if (questionName.trim().length === 0) {
-    //   disabled = true;
-    // }
-    //
-    // if (correctAnswer.trim().length === 0) {
-    //   disabled = true;
-    // }
-    //
-    // if (wrongAnswer.trim().length === 0) {
-    //   disabled = true;
-    // }
+    if (questionName.trim().length === 0) {
+      disabled = true;
+    }
 
+    if (correctAnswer.trim().length === 0) {
+      disabled = true;
+    }
+
+    if (wrongAnswer.trim().length === 0) {
+      disabled = true;
+    }
 
     return (
       <KeyboardAvoidingView>
