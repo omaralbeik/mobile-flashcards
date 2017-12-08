@@ -61,7 +61,7 @@ class CreateDeck extends React.Component {
           value={deckName}
           onChangeText={text => this.setState({deckName: text})}
         />
-        <Button title='Create' onPress={this.onPressCreate} disabled={disabled}/>
+        <Button title='Create Deck' onPress={this.onPressCreate} disabled={disabled}/>
       </View>
     )
   }

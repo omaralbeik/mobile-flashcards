@@ -15,7 +15,15 @@ const store = createStore(rootReducer);
 // Views
 import Navigator from './views/Navigator';
 
+// Helpers
+import {setLocalNotification} from './utils';
+
 export default class App extends React.Component {
+
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={store}>

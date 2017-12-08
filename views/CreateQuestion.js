@@ -89,7 +89,7 @@ class CreateQuestion extends React.Component {
           value={wrongAnswer}
           onChangeText={text => this.setState({wrongAnswer: text})}
         />
-        <Button title='Add' onPress={this.onPressAdd} disabled={disabled}/>
+        <Button title='Add Question' onPress={this.onPressAdd} disabled={disabled}/>
       </KeyboardAvoidingView>
     )
   }

@@ -15,6 +15,8 @@ import Question from '../components/Question';
 // Styled Components
 import styled from 'styled-components/native';
 
+// Helpers
+import {cancelLocalNotification, setLocalNotification} from '../utils';
 
 export default class Quiz extends React.Component {
 
@@ -38,6 +40,10 @@ export default class Quiz extends React.Component {
     return {
       title: `Quiz in ${deck.title}`
     }
+  }
+
+  didFinishQuiz() {
+    cancelLocalNotification().then(setLocalNotification());
   }
 
   renderResult() {
@@ -113,6 +119,7 @@ export default class Quiz extends React.Component {
     const {currentQuestionIndex} = this.state;
 
     if (currentQuestionIndex >= totalQuestions) {
+      this.didFinishQuiz();
       return this.renderResult();
     }
 
