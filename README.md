@@ -27,9 +27,3 @@ If you find a bug in the source code, you can help me by submitting an issue. Ev
 ## License
 
 This project is licensed under the MIT License
-
-
-You already use React to build your web apps. Now, using React Native, you’ll be able to develop React applications that run on both iOS and Android devices.
-
-
-This is the project for the final assessment project of Udacity's React-Native course. It is an app where users can create decks of flashcards, add cards to the decks, and quiz themselves on each deck.
