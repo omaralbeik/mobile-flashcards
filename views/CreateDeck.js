@@ -2,7 +2,7 @@
 import React from 'react';
 
 // React Native
-import {ScrollView, Text, StyleSheet, Alert} from 'react-native';
+import {View, Text, StyleSheet, Alert} from 'react-native';
 
 // Redux
 import { connect } from 'react-redux';
@@ -53,7 +53,7 @@ class CreateDeck extends React.Component {
     const {goBack, updater, navigate} = this.props;
     updater()
     goBack()
-    navigate(DECKDETAILS, {deck: deck});
+    navigate(DECKDETAILS, {deck: deck, updater: updater});
   }
 
   render() {
@@ -61,14 +61,14 @@ class CreateDeck extends React.Component {
     const disabled = deckName.trim().length === 0;
 
     return (
-      <ScrollView>
+      <View>
         <TextField
           placeholder='Deck Name'
           value={deckName}
           onChangeText={text => this.setState({deckName: text})}
         />
         <Button title='Create' onPress={this.onPressCreate} disabled={disabled}/>
-      </ScrollView>
+      </View>
     )
   }
 

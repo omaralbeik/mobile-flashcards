@@ -32,7 +32,6 @@ class DeckList extends React.Component {
   }
 
   static navigationOptions = ({navigation}) => {
-    console.log(navigation);
     return ({
       title: 'Decks',
     })
@@ -67,7 +66,7 @@ class DeckList extends React.Component {
         })}/>
         <FlatList
           data={decksArray}
-          renderItem={({item}) => <DeckListItem deck={item} navigation={navigation}/>}
+          renderItem={({item}) => <DeckListItem deck={item} navigation={navigation} updater={_ => this.fetchDecks()}/>}
         />
       </StyledView>
     )

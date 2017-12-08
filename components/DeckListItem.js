@@ -15,7 +15,8 @@ import styled from 'styled-components/native';
 export default class DeckListItem extends React.Component {
   static propTypes = {
     deck: PropTypes.object.isRequired,
-    navigation: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired,
+    updater: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -24,8 +25,8 @@ export default class DeckListItem extends React.Component {
   }
 
   onPress() {
-    const {deck, navigation} = this.props;
-    navigation.navigate(DECKDETAILS, {deck: deck});
+    const {deck, navigation, updater} = this.props;
+    navigation.navigate(DECKDETAILS, {deck: deck, updater: updater});
   }
 
   render() {
@@ -39,7 +40,7 @@ export default class DeckListItem extends React.Component {
         <StyledTitle>{deck.title}</StyledTitle>
         <StyledQuestion>{countText}</StyledQuestion>
       </StyledTouchableOpacity>
-  );
+    );
   }
 }
 

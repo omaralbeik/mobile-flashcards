@@ -49,6 +49,14 @@ export default class API {
     });
   }
 
+  static deleteDeck(deck) {
+    return this.getDecks().then(decks => {
+      decks[deck.key] = undefined
+      delete decks[deck.key]
+      return AsyncStorage.setItem(this.DECKS_STORAGE_KEY, JSON.stringify(decks))
+    })
+  }
+
   static clear() {
     return AsyncStorage.clear();
   }

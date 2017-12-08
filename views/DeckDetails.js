@@ -4,14 +4,28 @@ import React from 'react';
 // React Native
 import {ScrollView, Text} from 'react-native';
 
+// Redux
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+
 // Components
 import Button from '../components/Button';
 
 // Styled Components
 import styled from 'styled-components/native';
 
+// API
+import API from '../api';
 
 class DeckDetails extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.handleAddQuestion = this.handleAddQuestion.bind(this)
+    this.handleStartQuiz = this.handleStartQuiz.bind(this)
+    this.handleDeleteDeck = this.handleDeleteDeck.bind(this)
+  }
 
   static navigationOptions = ({ navigation }) => {
     const {deck} = navigation.state.params;
@@ -29,12 +43,21 @@ class DeckDetails extends React.Component {
   }
 
   handleDeleteDeck() {
-    console.log('Did press delete deck');
+    const {deck} = this.props.navigation.state.params;
+    API.deleteDeck(deck).then(_ => {
+      this.props.deleteDeck({type: actions.DELETE_DECK, deck});
+      this.goBack();
+    })
+  }
+
+  goBack() {
+    const {goBack, updater, navigate} = this.props;
+    updater()
+    goBack()
   }
 
   render() {
     const {deck} = this.props.navigation.state.params;
-
 
     return (
       <ScrollView>
@@ -56,5 +79,17 @@ const StyledTitleText = styled.Text`
   text-align: center;
 `
 
+function mapStateToProps({decks}, {navigation}) {
+  return {decks};
+}
 
-export default DeckDetails;
+function mapDispatchToProps(dispatch, {navigation}) {
+  return {
+    deleteDeck: deck => dispatch(actions.deleteDeck(deck)),
+    goBack: navigation.goBack,
+    updater: navigation.state.params.updater,
+    navigate: navigation.navigate
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckDetails);

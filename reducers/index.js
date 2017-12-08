@@ -1,4 +1,4 @@
-import {LOAD_DECKS, ADD_DECK} from '../actions';
+import {LOAD_DECKS, ADD_DECK, DELETE_DECK} from '../actions';
 
 
 export default function decks(state = {}, action) {
@@ -17,7 +17,14 @@ export default function decks(state = {}, action) {
     case ADD_DECK:
       return {
         ...state,
-        [deck.id]: deck
+        [deck.key]: deck
+      }
+
+    // delete a deck
+    case DELETE_DECK:
+      return {
+        ...state,
+        [deck.key]: null
       }
 
     // any other action: return all decks
