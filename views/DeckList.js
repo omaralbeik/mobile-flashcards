@@ -67,6 +67,7 @@ class DeckList extends React.Component {
         <FlatList
           data={decksArray}
           renderItem={({item}) => <DeckListItem deck={item} navigation={navigation} updater={_ => this.fetchDecks()}/>}
+          keyExtractor={(item, index) => index}
         />
       </StyledView>
     )
