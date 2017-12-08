@@ -6,6 +6,8 @@ This is the final assessment project for [Udacity](https://www.udacity.com/)'s [
 The project has been tested and confirmed to be working successfully on iOS 10.
 
 
+## [Live Demo](https://expo.io/@omaralbeik/mobile-flashcards)
+
 ## Getting Started
 
 ###### Install project dependancies
