@@ -21,40 +21,39 @@ import styled from 'styled-components/native';
 import API from '../api';
 
 class DeckDetails extends React.Component {
-
   constructor(props) {
     super(props);
 
-    this.handleAddQuestion = this.handleAddQuestion.bind(this)
-    this.handleStartQuiz = this.handleStartQuiz.bind(this)
-    this.handleDeleteDeck = this.handleDeleteDeck.bind(this)
+    this.onPressAddQuestion = this.onPressAddQuestion.bind(this)
+    this.onPressStartQuiz = this.onPressStartQuiz.bind(this)
+    this.onPressDeleteDeck = this.onPressDeleteDeck.bind(this)
   }
 
   static navigationOptions = ({ navigation }) => {
     const {deck} = navigation.state.params;
     return {
-      title: deck.title,
+      title: deck.title
     }
   }
 
-  handleAddQuestion() {
+  onPressAddQuestion() {
     const {deck} = this.props.navigation.state.params;
     const {navigate, updater} = this.props;
     navigate(CREATEQUESTION, {deck: deck, updater: updater});
   }
 
-  handleStartQuiz() {
+  onPressStartQuiz() {
     const {deck} = this.props.navigation.state.params;
     const {navigate} = this.props;
     navigate(QUIZ, {deck: deck});
   }
 
-  handleDeleteDeck() {
+  onPressDeleteDeck() {
     const {deck} = this.props.navigation.state.params;
     API.deleteDeck(deck).then(_ => {
       this.props.deleteDeck({type: actions.DELETE_DECK, deck});
       this.goBack();
-    })
+    });
   }
 
   goBack() {
@@ -70,24 +69,24 @@ class DeckDetails extends React.Component {
       return null;
     }
     return (
-      <Button title='Start Quiz' onPress={this.handleStartQuiz}/>
+      <Button title='Start Quiz' onPress={this.onPressStartQuiz}/>
     );
   }
 
   render() {
     const {deck} = this.props.navigation.state.params;
-    const count = deck.questions.length
+    const count = deck.questions.length;
     const countText = count === 0 ? 'No Questions' : `${count} Questions`;
 
     return (
       <ScrollView>
         <StyledTitleText>{deck.title}</StyledTitleText>
         <StyledSubtitleText>{countText}</StyledSubtitleText>
-        <Button title='Add Question' onPress={this.handleAddQuestion}/>
+        <Button title='Add Question' onPress={this.onPressAddQuestion}/>
         {this.renderStartQuizButton()}
-        <Button title='Delete Deck' onPress={this.handleDeleteDeck} destructive={true}/>
+        <Button title='Delete Deck' onPress={this.onPressDeleteDeck} destructive={true}/>
       </ScrollView>
-    )
+    );
   }
 
 }
@@ -100,11 +99,13 @@ const StyledTitleText = styled.Text`
   text-align: center;
 `
 
+// StyledSubtitleText
 const StyledSubtitleText = styled.Text`
   font-size: 15;
   padding-bottom: 20px;
   text-align: center;
 `
+
 
 function mapStateToProps({decks}, {navigation}) {
   return {decks};

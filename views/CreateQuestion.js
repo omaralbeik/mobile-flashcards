@@ -20,7 +20,6 @@ import API from '../api';
 
 
 class CreateQuestion extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -30,26 +29,24 @@ class CreateQuestion extends React.Component {
       wrongAnswer: ''
     };
 
-    this.onPressAdd = this.onPressAdd.bind(this)
+    this.onPressAdd = this.onPressAdd.bind(this);
   }
 
   static navigationOptions = ({navigation}) => ({
     title: 'Add Question'
-  })
+  });
 
   onPressAdd() {
-    console.log('Did press add question');
     const {deck} = this.props.navigation.state.params;
     const {questionName, correctAnswer, wrongAnswer} = this.state;
 
     API.addQuestionToDeck(deck, questionName, correctAnswer, wrongAnswer).then(deck => {
       this.props.addDeck({type: actions.ADD_DECK, deck});
-      this.goBack(deck);
-    })
-
+      this.goBack();
+    });
   }
 
-  goBack(deck) {
+  goBack() {
     const {goBack, updater} = this.props;
     updater()
     goBack()
@@ -57,7 +54,6 @@ class CreateQuestion extends React.Component {
 
   render() {
     const {questionName, correctAnswer, wrongAnswer} = this.state;
-
     var disabled = false;
 
     if (questionName.trim().length === 0) {
@@ -91,9 +87,8 @@ class CreateQuestion extends React.Component {
         />
         <Button title='Add Question' onPress={this.onPressAdd} disabled={disabled}/>
       </KeyboardAvoidingView>
-    )
+    );
   }
-
 }
 
 

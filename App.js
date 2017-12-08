@@ -18,8 +18,8 @@ import Navigator from './views/Navigator';
 // Helpers
 import {setLocalNotification} from './utils';
 
-export default class App extends React.Component {
 
+export default class App extends React.Component {
   componentDidMount() {
     setLocalNotification();
   }

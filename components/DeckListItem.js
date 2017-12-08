@@ -43,17 +43,20 @@ export default class DeckListItem extends React.Component {
   }
 }
 
+// StyledTouchableOpacity
 const StyledTouchableOpacity = styled.TouchableOpacity`
   background-color: white;
   padding: 20px;
   margin-bottom: 2px;
 `
 
+// StyledTitle
 const StyledTitle = styled.Text`
   font-size: 20;
   font-weight: bold;
 `
 
+// StyledQuestion
 const StyledQuestion = styled.Text`
   margin-top: 5px;
   font-size: 15;

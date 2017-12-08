@@ -21,18 +21,18 @@ import API from '../api';
 // Helpers
 import {generateId} from '../utils';
 
-class CreateDeck extends React.Component {
 
+class CreateDeck extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {deckName: ''};
-    this.onPressCreate = this.onPressCreate.bind(this)
+    this.onPressCreate = this.onPressCreate.bind(this);
   }
 
   static navigationOptions = ({navigation}) => ({
     title: 'Create New Deck'
-  })
+  });
 
   onPressCreate() {
     const {deckName} = this.state;
@@ -40,7 +40,7 @@ class CreateDeck extends React.Component {
     API.createDeck(generateId(), deckName).then(deck => {
       this.props.addDeck({type: actions.ADD_DECK, deck});
       this.goBack(deck);
-    })
+    });
   }
 
   goBack(deck) {
@@ -63,7 +63,7 @@ class CreateDeck extends React.Component {
         />
         <Button title='Create Deck' onPress={this.onPressCreate} disabled={disabled}/>
       </View>
-    )
+    );
   }
 
 }

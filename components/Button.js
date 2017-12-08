@@ -17,11 +17,6 @@ export default class Button extends React.Component {
     destructive: PropTypes.bool
   }
 
-  constructor(props) {
-    super(props);
-
-  }
-
   render() {
     const {title, onPress, disabled, destructive} = this.props;
 

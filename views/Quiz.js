@@ -18,8 +18,8 @@ import styled from 'styled-components/native';
 // Helpers
 import {cancelLocalNotification, setLocalNotification} from '../utils';
 
-export default class Quiz extends React.Component {
 
+export default class Quiz extends React.Component {
   constructor(props) {
     super(props);
 
@@ -39,10 +39,34 @@ export default class Quiz extends React.Component {
 
     return {
       title: `Quiz in ${deck.title}`
-    }
+    };
   }
 
-  didFinishQuiz() {
+  onPressCorrectAnswer() {
+    const {currentQuestionIndex, correctCount} = this.state;
+    this.setState({
+      currentQuestionIndex: currentQuestionIndex + 1,
+      correctCount: correctCount + 1
+    })
+  }
+
+  onPressWrongAnswer() {
+    const {currentQuestionIndex, wrongCount} = this.state;
+    this.setState({
+      currentQuestionIndex: currentQuestionIndex + 1,
+      wrongCount: wrongCount + 1
+    })
+  }
+
+  onPressRetakeQuiz() {
+    this.setState({
+      currentQuestionIndex: 0,
+      correctCount: 0,
+      wrongCount: 0
+    });
+  }
+
+  onFinishQuiz() {
     cancelLocalNotification().then(setLocalNotification());
   }
 
@@ -77,31 +101,6 @@ export default class Quiz extends React.Component {
         </StyledAnswersView>
       );
     }
-
-  }
-
-  onPressCorrectAnswer() {
-    const {currentQuestionIndex, correctCount} = this.state;
-    this.setState({
-      currentQuestionIndex: currentQuestionIndex + 1,
-      correctCount: correctCount + 1
-    })
-  }
-
-  onPressWrongAnswer() {
-    const {currentQuestionIndex, wrongCount} = this.state;
-    this.setState({
-      currentQuestionIndex: currentQuestionIndex + 1,
-      wrongCount: wrongCount + 1
-    })
-  }
-
-  onPressRetakeQuiz() {
-    this.setState({
-      currentQuestionIndex: 0,
-      correctCount: 0,
-      wrongCount: 0
-    });
   }
 
   renderQuesion(question) {
@@ -119,35 +118,36 @@ export default class Quiz extends React.Component {
     const {currentQuestionIndex} = this.state;
 
     if (currentQuestionIndex >= totalQuestions) {
-      this.didFinishQuiz();
+      this.onFinishQuiz();
       return this.renderResult();
     }
 
     const currentQuestion = deck.questions[currentQuestionIndex];
-
-    const status = `Question ${currentQuestionIndex + 1} out of ${totalQuestions}`
-
+    const status = `Question ${currentQuestionIndex + 1} out of ${totalQuestions}`;
 
     return (
       <View>
         <StyledStatusText>{status}</StyledStatusText>
         {this.renderQuesion(currentQuestion)}
       </View>
-    )
+    );
   }
 
 }
 
+// StyledStatusText
 const StyledStatusText = styled.Text`
   font-size: 14;
   text-align: center;
   padding: 20px;
 `
 
+// StyledAnswersView
 const StyledAnswersView = styled.View`
   margin-top: 50px;
 `
 
+// StyledResultTitle
 const StyledResultTitle = styled.Text`
   font-size: 30;
   text-align: center;
@@ -155,6 +155,7 @@ const StyledResultTitle = styled.Text`
   font-weight: bold;
 `
 
+// StyledResultSubtitle
 const StyledResultSubtitle = styled.Text`
   font-size: 20;
   text-align: center;

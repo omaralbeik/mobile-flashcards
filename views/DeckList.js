@@ -24,7 +24,6 @@ import {generateId, arrayFromObject} from '../utils';
 
 
 class DeckList extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -44,18 +43,6 @@ class DeckList extends React.Component {
   }
 
   render() {
-    // API.clear();
-
-    // API.createDeck(2, Math.random().toString(36).substr(2, 75)).then(deck => {
-    //   console.log(deck);
-    // })
-
-    // for (var index = 0; index < 10; index++) {
-    //   const id = generateId()
-    //   API.createDeck(id, Math.random().toString(36).substr(2, 75))
-    //   console.log(id);
-    // }
-
     const {decks, navigation} = this.props;
     const decksArray = arrayFromObject(decks);
 

@@ -4,6 +4,7 @@ import { AsyncStorage } from 'react-native';
 // Expo
 import { Notifications, Permissions } from 'expo';
 
+
 /**
  * Create a random id
  */
