@@ -8,36 +8,38 @@ export default class API {
     return 'FlashCards:decks';
   }
 
-  static createDeck(id, title, questions = []) {
+  static createDeck(key, title, questions = []) {
     const data = JSON.stringify({
-      [id]: {
-        key: id,
+      [key]: {
+        key: key,
         title: title,
         questions: questions
       }
     })
     return AsyncStorage.mergeItem(this.DECKS_STORAGE_KEY, data).then(_ => {
-      return this.getDeck(id);
+      return this.getDeck(key);
     });
   }
 
   static addQuestionToDeck(deck, questionTitle, correctAnswer, wrongAnswer) {
-    const {id, title} = deck;
-    var {questions} = deck;
+    const {key, title} = deck;
+    var {
+      questions
+    } = deck;
     const question = {
       title: questionTitle,
       correctAnswer: correctAnswer,
       wrongAnswer: wrongAnswer
     }
     questions.push(question);
-    return this.createDeck(id, title, questions);
+    return this.createDeck(key, title, questions);
   }
 
-  static getDeck(id) {
+  static getDeck(key) {
     return this.getDecks().then(decks => {
       return Object.keys(decks).length === 0
         ? {}
-        : decks[id];
+        : decks[key];
     })
   }
 

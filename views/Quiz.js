@@ -75,7 +75,6 @@ export default class Quiz extends React.Component {
   }
 
   onPressCorrectAnswer() {
-    console.log('onPressCorrectAnswer');
     const {currentQuestionIndex, correctCount} = this.state;
     this.setState({
       currentQuestionIndex: currentQuestionIndex + 1,
@@ -84,7 +83,6 @@ export default class Quiz extends React.Component {
   }
 
   onPressWrongAnswer() {
-    console.log('onPressWrongAnswer');
     const {currentQuestionIndex, wrongCount} = this.state;
     this.setState({
       currentQuestionIndex: currentQuestionIndex + 1,
