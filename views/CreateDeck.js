@@ -2,14 +2,13 @@
 import React from 'react';
 
 // React Native
-import {View, Text, StyleSheet, Alert} from 'react-native';
+import {View, Text} from 'react-native';
 
 // Redux
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 // Navigation
-import {NavigationActions} from 'react-navigation';
 import {DECKLIST, DECKDETAILS} from '../views/Navigator';
 
 // Components
@@ -37,11 +36,6 @@ class CreateDeck extends React.Component {
 
   onPressCreate() {
     const {deckName} = this.state;
-
-    if (deckName.trim().length === 0) {
-      Alert.alert('No Name','Deck name cannot be empty.')
-      return;
-    }
 
     API.createDeck(generateId(), deckName).then(deck => {
       this.props.addDeck({type: actions.ADD_DECK, deck});

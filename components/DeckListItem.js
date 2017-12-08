@@ -32,7 +32,6 @@ export default class DeckListItem extends React.Component {
   render() {
     const {deck} = this.props;
     const count = deck.questions.length
-
     const countText = count === 0 ? 'No Questions' : `${count} Questions`;
 
     return (

@@ -5,11 +5,13 @@ import {StackNavigator} from 'react-navigation';
 import DeckList from './DeckList';
 import CreateDeck from './CreateDeck';
 import DeckDetails from './DeckDetails';
+import CreateQuestion from './CreateQuestion';
 
 // View Names
 export const DECKLIST = 'DeckList';
 export const CREATEDECK = 'CreateDeck';
 export const DECKDETAILS = 'DeckDetails';
+export const CREATEQUESTION = 'CreateQuestion';
 
 
 export default Navigator = StackNavigator({
@@ -21,5 +23,8 @@ export default Navigator = StackNavigator({
   },
   [DECKDETAILS]: {
     screen: DeckDetails
+  },
+  [CREATEQUESTION]: {
+    screen: CreateQuestion
   }
 })

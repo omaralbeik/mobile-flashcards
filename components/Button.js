@@ -35,6 +35,7 @@ export default class Button extends React.Component {
 
 // StyledTouchableOpacity
 const StyledTouchableOpacity = styled.TouchableOpacity`
+  margin-bottom: 2px;
   padding: 10px;
   background-color: ${props => props.disabled ? 'lightgray' : props.destructive ? 'red' : 'blue'};
   height: 50px;

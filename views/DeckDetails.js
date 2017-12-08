@@ -8,6 +8,9 @@ import {ScrollView, Text} from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
+// Navigation
+import {CREATEQUESTION} from '../views/Navigator';
+
 // Components
 import Button from '../components/Button';
 
@@ -36,6 +39,9 @@ class DeckDetails extends React.Component {
 
   handleAddQuestion() {
     console.log('Did press create question');
+    const {deck} = this.props.navigation.state.params;
+    const {navigate, updater} = this.props;
+    navigate(CREATEQUESTION, {deck: deck, updater: updater});
   }
 
   handleStartQuiz() {
@@ -51,19 +57,33 @@ class DeckDetails extends React.Component {
   }
 
   goBack() {
-    const {goBack, updater, navigate} = this.props;
+    const {goBack, updater} = this.props;
     updater()
     goBack()
   }
 
+  renderStartQuizButton() {
+    const {deck} = this.props.navigation.state.params;
+
+    if (deck.questions.length === 0) {
+      return null;
+    }
+    return (
+      <Button title='Start Quiz' onPress={this.handleStartQuiz}/>
+    );
+  }
+
   render() {
     const {deck} = this.props.navigation.state.params;
+    const count = deck.questions.length
+    const countText = count === 0 ? 'No Questions' : `${count} Questions`;
 
     return (
       <ScrollView>
         <StyledTitleText>{deck.title}</StyledTitleText>
+        <StyledSubtitleText>{countText}</StyledSubtitleText>
         <Button title='Add Question' onPress={this.handleAddQuestion}/>
-        <Button title='Start Quiz' onPress={this.handleStartQuiz} disabled={deck.questions.length === 0}/>
+        {this.renderStartQuizButton()}
         <Button title='Delete Deck' onPress={this.handleDeleteDeck} destructive={true}/>
       </ScrollView>
     )
@@ -75,7 +95,13 @@ class DeckDetails extends React.Component {
 const StyledTitleText = styled.Text`
   font-size: 20;
   font-weight: bold;
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
+  text-align: center;
+`
+
+const StyledSubtitleText = styled.Text`
+  font-size: 15;
+  padding-bottom: 20px;
   text-align: center;
 `
 
