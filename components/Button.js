@@ -9,23 +9,21 @@ import {Text, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 
 
-export default class Button extends React.Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    onPress: PropTypes.func,
-    disabled: PropTypes.bool,
-    destructive: PropTypes.bool
-  }
+export default function Button(props) {
+  const {title, onPress, disabled, destructive} = props;
 
-  render() {
-    const {title, onPress, disabled, destructive} = this.props;
+  return (
+    <StyledTouchableOpacity onPress={onPress} disabled={disabled} destructive={destructive}>
+      <StyledText>{title}</StyledText>
+    </StyledTouchableOpacity>
+  );
+}
 
-    return (
-      <StyledTouchableOpacity onPress={onPress} disabled={disabled} destructive={destructive}>
-        <StyledText>{title}</StyledText>
-      </StyledTouchableOpacity>
-    );
-  }
+Button.propTypes = {
+  title: PropTypes.string.isRequired,
+  onPress: PropTypes.func,
+  disabled: PropTypes.bool,
+  destructive: PropTypes.bool
 }
 
 // StyledTouchableOpacity

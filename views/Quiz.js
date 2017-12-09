@@ -4,10 +4,6 @@ import React from 'react';
 // React Native
 import {View, Text} from 'react-native';
 
-// Redux
-import { connect } from 'react-redux';
-import * as actions from '../actions';
-
 // Components
 import Button from '../components/Button';
 import Question from '../components/Question';
@@ -20,8 +16,8 @@ import {cancelLocalNotification, setLocalNotification} from '../utils';
 
 
 export default class Quiz extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       currentQuestionIndex: 0,
@@ -32,6 +28,7 @@ export default class Quiz extends React.Component {
     this.onPressCorrectAnswer = this.onPressCorrectAnswer.bind(this)
     this.onPressWrongAnswer = this.onPressWrongAnswer.bind(this)
     this.onPressRetakeQuiz = this.onPressRetakeQuiz.bind(this)
+    this.onPressBack = this.onPressBack.bind(this)
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -66,6 +63,11 @@ export default class Quiz extends React.Component {
     });
   }
 
+  onPressBack() {
+    const {goBack} = this.props.navigation;
+    goBack();
+  }
+
   onFinishQuiz() {
     cancelLocalNotification().then(setLocalNotification());
   }
@@ -79,6 +81,7 @@ export default class Quiz extends React.Component {
         <StyledResultTitle>Quiz Ended</StyledResultTitle>
         <StyledResultSubtitle>{subtitle}</StyledResultSubtitle>
         <Button title='Retake the Quiz' onPress={this.onPressRetakeQuiz}/>
+        <Button title='Back to Deck' onPress={this.onPressBack}/>
       </View>
     );
   }

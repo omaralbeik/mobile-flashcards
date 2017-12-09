@@ -5,8 +5,9 @@ import React from 'react';
 import {KeyboardAvoidingView, Text, Alert} from 'react-native';
 
 // Redux
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as actions from '../actions';
+import {ADD_DECK} from '../actions/types';
 
 // Navigation
 import {DECKDETAILS} from '../views/Navigator';
@@ -20,8 +21,8 @@ import API from '../api';
 
 
 class CreateQuestion extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       questionName: '',
@@ -41,7 +42,7 @@ class CreateQuestion extends React.Component {
     const {questionName, correctAnswer, wrongAnswer} = this.state;
 
     API.addQuestionToDeck(deck, questionName, correctAnswer, wrongAnswer).then(deck => {
-      this.props.addDeck({type: actions.ADD_DECK, deck});
+      this.props.addDeck({type: ADD_DECK, deck});
       this.goBack();
     });
   }
@@ -54,7 +55,7 @@ class CreateQuestion extends React.Component {
 
   render() {
     const {questionName, correctAnswer, wrongAnswer} = this.state;
-    var disabled = false;
+    let disabled = false;
 
     if (questionName.trim().length === 0) {
       disabled = true;

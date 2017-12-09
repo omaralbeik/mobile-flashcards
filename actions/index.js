@@ -1,9 +1,6 @@
-/**
- * Actions
- */
-export const LOAD_DECKS = 'LOAD_DECKS';
-export const ADD_DECK = 'ADD_DECK';
-export const DELETE_DECK = 'DELETE_DECK';
+import {
+  LOAD_DECKS, ADD_DECK, DELETE_DECK
+} from './types';
 
 /**
  * Action Creators

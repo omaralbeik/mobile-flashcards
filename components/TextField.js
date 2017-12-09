@@ -8,13 +8,10 @@ import {TextInput} from 'react-native';
 import styled from 'styled-components/native';
 
 
-export default class TextField extends React.Component {
-
-  render() {
-    return (
-      <StyledTextInput {...this.props}/>
-    );
-  }
+export default function TextField(props) {
+  return (
+    <StyledTextInput {...props}/>
+  );
 }
 
 // StyledTextInput

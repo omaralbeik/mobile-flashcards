@@ -5,8 +5,9 @@ import React from 'react';
 import {ScrollView, Text} from 'react-native';
 
 // Redux
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as actions from '../actions';
+import {DELETE_DECK} from '../actions/types';
 
 // Navigation
 import {CREATEQUESTION, QUIZ} from '../views/Navigator';
@@ -21,8 +22,8 @@ import styled from 'styled-components/native';
 import API from '../api';
 
 class DeckDetails extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.onPressAddQuestion = this.onPressAddQuestion.bind(this)
     this.onPressStartQuiz = this.onPressStartQuiz.bind(this)
@@ -51,7 +52,7 @@ class DeckDetails extends React.Component {
   onPressDeleteDeck() {
     const {deck} = this.props.navigation.state.params;
     API.deleteDeck(deck).then(_ => {
-      this.props.deleteDeck({type: actions.DELETE_DECK, deck});
+      this.props.deleteDeck({type: DELETE_DECK, deck});
       this.goBack();
     });
   }

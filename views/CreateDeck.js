@@ -5,8 +5,9 @@ import React from 'react';
 import {View, Text} from 'react-native';
 
 // Redux
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as actions from '../actions';
+import {ADD_DECK} from '../actions/types'
 
 // Navigation
 import {DECKLIST, DECKDETAILS} from '../views/Navigator';
@@ -23,8 +24,8 @@ import {generateId} from '../utils';
 
 
 class CreateDeck extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {deckName: ''};
     this.onPressCreate = this.onPressCreate.bind(this);
@@ -38,7 +39,7 @@ class CreateDeck extends React.Component {
     const {deckName} = this.state;
 
     API.createDeck(generateId(), deckName).then(deck => {
-      this.props.addDeck({type: actions.ADD_DECK, deck});
+      this.props.addDeck({type: ADD_DECK, deck});
       this.goBack(deck);
     });
   }

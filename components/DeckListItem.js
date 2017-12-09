@@ -19,24 +19,18 @@ export default class DeckListItem extends React.Component {
     updater: PropTypes.func.isRequired
   }
 
-  constructor(props) {
-    super(props);
-    this.onPress = this.onPress.bind(this)
-  }
-
   onPress() {
     const {deck, navigation, updater} = this.props;
     navigation.navigate(DECKDETAILS, {deck: deck, updater: updater});
   }
 
   render() {
-    const {deck} = this.props;
-    const count = deck.questions.length
-    const countText = count === 0 ? 'No Questions' : `${count} Questions`;
+    const {deck: { questions: {length}, title }} = this.props;
+    const countText = length === 0 ? 'No Questions' : `${length} Questions`;
 
     return (
-      <StyledTouchableOpacity onPress={this.onPress}>
-        <StyledTitle>{deck.title}</StyledTitle>
+      <StyledTouchableOpacity onPress={_ => this.onPress()}>
+        <StyledTitle>{title}</StyledTitle>
         <StyledQuestion>{countText}</StyledQuestion>
       </StyledTouchableOpacity>
     );

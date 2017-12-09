@@ -1,4 +1,4 @@
-import {LOAD_DECKS, ADD_DECK, DELETE_DECK} from '../actions';
+import {LOAD_DECKS, ADD_DECK, DELETE_DECK} from '../actions/types';
 
 
 export default function decks(state = {}, action) {

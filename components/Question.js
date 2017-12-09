@@ -14,8 +14,8 @@ export default class Question extends React.Component {
     question: PropTypes.object.isRequired,
   }
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {isAnswerVisible: false};
     this.onPressButton = this.onPressButton.bind(this)

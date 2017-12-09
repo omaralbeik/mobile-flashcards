@@ -5,8 +5,9 @@ import React from 'react';
 import {View, Text, FlatList} from 'react-native';
 
 // Redux
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as actions from '../actions';
+import {LOAD_DECKS} from '../actions/types';
 
 // Components
 import DeckListItem from '../components/DeckListItem';
@@ -24,8 +25,8 @@ import {generateId, arrayFromObject} from '../utils';
 
 
 class DeckList extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.fetchDecks()
   }
@@ -38,7 +39,7 @@ class DeckList extends React.Component {
 
   fetchDecks() {
     API.getDecks().then(decks => {
-      this.props.loadDecks({type: actions.LOAD_DECKS, decks})
+      this.props.loadDecks({type: LOAD_DECKS, decks})
     })
   }
 
